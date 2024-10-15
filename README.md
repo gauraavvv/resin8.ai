@@ -32,14 +32,26 @@ python.exe -m uvicorn.main app.main:app --reload
 
 visit http://localhost:8000
 
-### 5. How this application works and what to do with it.
+## How this application works
 
-You will be provided a json file in addition to this code. When you upload the json file, the middleware simply returns the file. Your task is to write code in the middleware file (processPrompt) that uses publicly available LLM apis e.g. LLama, or OpenAI, or other open-source models (perhaps from Huggingface.io), to do the following:
+You will be provided with a JSON file along with this code. Upon uploading the JSON file, the middleware simply returns the file. Your task is to write code in the middleware file (`processPrompt`) that uses publicly available LLM APIs (e.g., LLama, OpenAI, or other open-source models like those from Huggingface.io) to perform the following:
 
-####1. Look at each of the json objects in the array, and use the description/product details/taxonomy fields to find more information on the internet about that equipment/product. You are to produce more information about each product and write that into the product json object in a new field called "augmented_data".
-###2. This new field must contain data that improves on what we already have in that object under the fields description/product details/taxonomy.
-##3. This workflow would involve scrapping data about the product described in realtime dynamically.
+### 1. For each JSON object in the array:
+   - Use the `description`, `product details`, and `taxonomy` fields to gather more information about that product from the internet.
+   - Enhance the object by adding more detailed information in a new field called `"augmented_data"`.
 
-Optional:
-##4. if the price of the product object is 0, scrap that data from the internet and provide a price recommendation. If your middle ware finds a price suggestion, then write that into the price field. 
-##5. If you can, find the product weight and write that into a new field called product_weight.
+### 2. This `"augmented_data"` field should:
+   - Contain data that improves on the existing information under the fields `description`, `product details`, or `taxonomy`.
+
+### 3. This workflow should dynamically scrape data from the internet about the described product in real-time.
+
+---
+
+## Optional Features:
+
+### 4. If the `price` field of a product object is `0`:
+   - Scrape the data from the internet and provide a price recommendation.
+   - If a price suggestion is found, write it into the `price` field.
+
+### 5. If possible, find the product's weight and:
+   - Add it to a new field called `"product_weight"`.
