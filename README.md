@@ -55,3 +55,4 @@ You will be provided with a JSON file along with this code. Upon uploading the J
 
 ### 5. If possible, find the product's weight and:
    - Add it to a new field called `"product_weight"`.
+# resin8.ai
