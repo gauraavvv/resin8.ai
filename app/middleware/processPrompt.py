@@ -1,23 +1,25 @@
-import os
+import os as os
 import openai 
 import tiktoken
 from dotenv import load_dotenv, find_dotenv
 from typing import Dict
 
-
-#openai.api_key  = "sk-y_9Z1HapNzRwJgiaRkKRawrt3-8D2KA6zTFX-3t5GTT3BlbkFJ9hlUe3AqeY6agzHKcUYF9PdNVJbXFYvIDT5osvQ1oA"
+_ = load_dotenv(find_dotenv())  # read local .env fil
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def get_completion(prompt, model="gpt-3.5-turbo"):
     
-
-    messages = [{"role": "user", "content": prompt}, {'role':'system', 
+    try:
+     messages = [{"role": "user", "content": prompt}, {'role':'system', 
  "content":"you are an AI assistant with expertise in providing important features of `description`, `product details`, and `taxonomy` from the json format provided, dont provide html tags "}]
-    response = openai.ChatCompletion.create(
+     response = openai.ChatCompletion.create(
         model=model,
         messages=messages,
         temperature=0, # this is the degree of randomness of the model's output 
     )
-    return response.choices[0].message["content"] 
+     return response.choices[0].message["content"] 
+    except openai.error.AuthenticationError:
+        return "Authentication failed: API key is invalid or missing."
 
 def get_completion_final(prompt, model="gpt-3.5-turbo"):
     
